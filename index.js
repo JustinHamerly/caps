@@ -9,14 +9,13 @@ const server = socketio(PORT);
 
 const caps = server.of('/caps');
 
-let orderId;
+// let orderId;
 
 caps.on('connection', (socket) => {
   console.log('Connected to socket', socket.id);
 
   socket.on('pickup', (payload) => {
-    orderId = payload.orderId;
-    socket.join(orderId);
+    socket.join(payload.orderId);
     caps.emit('join', payload);
     console.log(payload);
   });
